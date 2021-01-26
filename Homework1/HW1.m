@@ -27,8 +27,8 @@ for j=1:49
 %     pause(0.2)
 end
 aveUks = abs(Uks)/max(abs(Uks(:)));
-isosurface(Kx,Ky,Kz,aveUks,0.9);
-axis([-10 10 -10 10 -10 10]), grid on, drawnow
+% isosurface(Kx,Ky,Kz,aveUks,0.9);
+% axis([-10 10 -10 10 -10 10]), grid on, drawnow
 
 % Uks2 = Uks(:,:,39);
 % PDF2 = abs(Uks2).^2/trapz(ks, trapz(ks, abs(Uks2).^2));
@@ -56,20 +56,27 @@ kz = ExpVal(ks, abs(Uks).^2, Kz, cutoff)
 filter = ifftshift(exp(-0.1*((Kx - kx).^2 + (Ky - ky).^2 +(Kz - kz).^2)));
 
 %isosurface(Kx,Ky,Kz,filter,0.9);
+subLoc = zeros(49, 3);
+for j=1:49
+    Un(:,:,:)=reshape(subdata(:,j),n,n,n);
+    Uf = ifftn(filter.*fftn(Un));
+    Ufn = abs(Uf)/max(abs(Uf(:)));
+    xLoc = ExpVal(x, Ufn, X, cutoff);
+    yLoc = ExpVal(y, Ufn, Y, cutoff);
+    zLoc = ExpVal(z, Ufn, Z, cutoff);
+    subLoc(j, :) = [xLoc yLoc zLoc];
+end
 
-Uf = ifftn(filter.*fftn(Un));
-Ufn = abs(Uf)/max(abs(Uf(:)));
 figure;
-isosurface(X,Y,Z,Ufn,0.9);
-axis([-10 10 -10 10 -10 10]), grid on, drawnow
-figure;
-isosurface(X,Y,Z,abs(Un)/max(abs(Un(:))),0.9);
-axis([-10 10 -10 10 -10 10]), grid on, drawnow
+plot3(subLoc(:, 1), subLoc(:, 2), subLoc(:, 2))
+
+% figure;
+% isosurface(X,Y,Z,Ufn,0.9);
+% axis([-10 10 -10 10 -10 10]), grid on, drawnow
+% figure;
+% isosurface(X,Y,Z,abs(Un)/max(abs(Un(:))),0.9);
+% axis([-10 10 -10 10 -10 10]), grid on, drawnow
 %     axis([-20 20 -20 20 -20 20]), grid on, drawnow
-
-xLoc = ExpVal(x, Ufn, X, cutoff)
-yLoc = ExpVal(y, Ufn, Y, cutoff)
-zLoc = ExpVal(z, Ufn, Z, cutoff)
 
 %Triple integral of a cubic matrix F along x_ in each dimension
 function int = Int3(x_, F)
