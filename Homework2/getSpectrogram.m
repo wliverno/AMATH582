@@ -15,7 +15,7 @@ function [spectrogram, tg, freq] = getSpectrogram(inputFile, width, maxFreq)
     yc(1) = 0;
 
     %Plot time domain signal
-    subplot(2,1,1), plot(tc,yc);
+    subplot(1,2,1), plot(tc,yc);
     xlabel('Time [sec]');
     ylabel('Amplitude');
     title(inputFile);
@@ -42,11 +42,9 @@ function [spectrogram, tg, freq] = getSpectrogram(inputFile, width, maxFreq)
         spectrogram(:,i) = ifftshift(fft(yf));
     end
     
-    %spectrogram(abs(freq)<400, :) = 0;
-    %spectrogram(abs(freq)>1200, :) = 0;
     
     %Plot Results and play song
-    subplot(2,1,2), contourf(tg, freq, log(abs(spectrogram))>0, 'LineStyle', 'none'), colormap(hot);
+    subplot(1,2,2), contourf(tg, freq, abs(spectrogram), 'LineStyle', 'none'), colormap(hot);
     xlabel('Time [sec]');
     ylabel('Freq [Hz]');
     title('Spectrogram');
@@ -56,21 +54,6 @@ function [spectrogram, tg, freq] = getSpectrogram(inputFile, width, maxFreq)
     [maxFreq, yback] = reverseSpectrogram(spectrogram,tg,freq);
     tback =(1:length(yback))/maxFreq;
     %subplot(2,1,1), plot(tback, yback);
-    p8 = audioplayer(yback,maxFreq);
-    playblocking(p8);
-end
-
-function [Fs, data]= reverseSpectrogram(spectrogram, tg, freq)
-    n = length(freq);
-    width = tg(2);
-    Fs = n/(2*width);
-    tw = linspace(0,width,n);
-    filt = exp(-10*((tw/width)-0.5).^2);
-    data=zeros(floor(tg(end)*Fs),1);
-    for i=2:(length(tg)-1)
-        firstInd = round(tg(i-1)*Fs+1);
-        lastInd = round(tg(i+1)*Fs);
-        ind = firstInd:lastInd;
-        data(ind) = ifft(fftshift(spectrogram(:,i)))./filt';
-    end
+    %p8 = audioplayer(yback(1:length(yback)/10),maxFreq);
+    %playblocking(p8);
 end
