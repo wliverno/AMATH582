@@ -41,7 +41,7 @@ function [lambda, Y, U] = camAnalysis1(vidFramesList, xCropList, yCropList)
             if isnan(y(i))&(i>1)
                 y(i) = y(i-1);
             end
-            %subplot(2,3,j), imshow(uint8(frame)), drawnow;
+            %subplot(2,3,j), imshow(uint8(frame)), drawnow; %View video
         end
         t=1:n;
         subplot(2,3,j), plot(t,x,t,y);
