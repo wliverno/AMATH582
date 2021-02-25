@@ -25,3 +25,11 @@ out = getNotes('GNR.m4a, 800, 200)
 ```
 
 where `out` contains two string columns with timing and note location (i.e. C4, A#2). The "floydAnalysis.m" file contains a demo of these tools and is described in more detail in HW2.pdf.
+## Homework 3
+Several scripts were written to analyze camera footage of a paint can on a spring. Three cameras were used to capture videos of 4 experimental setups that must be [downloaded as matrix files](https://drive.google.com/drive/folders/1SQ77P5t5RUWCSucmk4jPFbufFMX8VrJG?usp=sharing). Principle component analysis was used to isolate the orthagonal directions of motion. To plot the analysis of the experiments, run `HW3.m`. A helper function was also used to isolate features from multiple frames of the photo called `eigenBucket.m` that has the following inputs and outputs
+
+```
+[EB] = eigenBucket(movie, numImages, skip)
+```
+
+where `movie` is a 4D matrix containing the RGB video, `numImages` is the total number of images to process, and `skip` is the sampling rate of frames to average the image. The output, `EB` is a grayscale image with the same dimensions as each frame in `movie` containing the 20 most common eigen-features of the frame combined into a single image.

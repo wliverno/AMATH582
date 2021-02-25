@@ -24,6 +24,7 @@ load cam1_3.mat
 load cam2_3.mat
 load cam3_3.mat
 vidFramesList={vidFrames1_3(:,:,:,16:end), vidFrames2_3, vidFrames3_3(:,:,:,6:end)};
+figure;
 xCropList ={250:400, 225:400, 170:600};
 yCropList ={1:480, 150:450, 200:400};
 [lambda3, Y3, U3] = camAnalysis1(vidFramesList,xCropList,yCropList);
@@ -33,6 +34,7 @@ load cam1_4.mat
 load cam2_4.mat
 load cam3_4.mat
 vidFramesList={vidFrames1_4, vidFrames2_4(:,:,:,7:end), vidFrames3_4};
+figure;
 xCropList ={250:400, 225:400, 200:600};
 yCropList ={1:480, 150:450, 100:300};
 [lambda4, Y4, U4] = camAnalysis1(vidFramesList,xCropList,yCropList);
