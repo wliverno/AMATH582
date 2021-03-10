@@ -33,12 +33,14 @@ svPC = svPC(features, :);
 uPC = U(:,features);
 imgPC = uPC*svPC;
 
-%Show 4 test images and labels to show projection on principle components
+%Show rank given different principle components
 figure;
-for i=1:4
-    im = uint8(reshape(imgPC(:, i), lx, ly));
-    subplot(1,4,i), imshow(im), title(['Label =', num2str(labels(sample(i)))]);
+rank=[3, 5, 8, 10, 784];
+for i=1:length(rank)
+    im = uint8(reshape(U(:,1:rank(i))*S(1:rank(i),:)*(V(1,:)'), lx, ly));
+    subplot(1,5,i), imshow(im), title(['First ', num2str(rank(i)), ' PCs']);
 end
+title('Full Image');
 
 %3D plot showing projection on principle components of each number
 components = [2 3 5];
