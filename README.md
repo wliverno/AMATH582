@@ -33,3 +33,7 @@ Several scripts were written to analyze camera footage of a paint can on a sprin
 ```
 
 where `movie` is a 4D matrix containing the RGB video, `numImages` is the total number of images to process, and `skip` is the sampling rate of frames to average the image. The output, `EB` is a grayscale image with the same dimensions as each frame in `movie` containing the 20 most common eigen-features of the frame combined into a single image.
+
+## Homework 4
+
+This homeworked use principle components analysis and simple supervised machine-learning algorithms to read digits from images using the MNIST handwritten digits database. To get started, download and extract the four gzip archives from [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/) to your local directory. Then run `mnistSVD.m` to generate the basis matrices, which will be stored in the file `pcaMats.mat`. Finally, run the `mnistClassifiers.m` file to test the various classifiers and visualize data clusters.
