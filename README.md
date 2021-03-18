@@ -37,3 +37,13 @@ where `movie` is a 4D matrix containing the RGB video, `numImages` is the total 
 ## Homework 4
 
 This homeworked use principle components analysis and simple supervised machine-learning algorithms to read digits from images using the MNIST handwritten digits database. To get started, download and extract the four gzip archives from [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/) to your local directory. Then run `mnistSVD.m` to generate the basis matrices, which will be stored in the file `pcaMats.mat`. Finally, run the `mnistClassifiers.m` file to test the various classifiers and visualize data clusters.
+
+## Homework 5
+Dynamic mode decomposition (DMD) was used to separate the foreground and background of images. Using a low-rank basis and isolating low frequency DMD modes, background subtraction was used to isolate moving features. The general function from `dmdBgSub.m` was used to process the images with the following arguments
+
+```
+[fgvid, bgvid] = eigenBucket(filename, rank, cutoff)
+```
+where the `rank` variable determined the number of SVD modes to use for background reconstruction and the `cutoff` variable was used as an upper limit to the frequency for the background DMD modes.
+
+A demo of this was implemented in `HW5.m` which processes two video files that can be [downloaded here.](https://drive.google.com/drive/folders/1SQ77P5t5RUWCSucmk4jPFbufFMX8VrJG?usp=sharing). The grayscale foreground and background videos are written to AVI movie files.

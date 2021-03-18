@@ -53,11 +53,11 @@ function [fgVid, bgVid] = dmdBgSum(filename, rank, cutoff)
         % negInds = foregroundvec<0;
         % backgroundvec(negInds) = backgroundvec(negInds) - foregroundvec(negInds);
         foregroundvec = foregroundvec - min(foregroundvec);
-        bg = uint8(mat2gray(reshape(backgroundvec, lx, ly))*255);
-        fg = uint8(mat2gray(reshape(foregroundvec, lx, ly))*255);
+        bg = uint8(reshape(backgroundvec, lx, ly)*255/max(backgroundvec));
+        fg = uint8(reshape(foregroundvec, lx, ly)*255/max(foregroundvec));
         % Plot the original, FG, and BG of specified frames
         if ismember(i, preview) 
-            im = uint8(mat2gray(reshape(framevec, lx, ly))*255);
+            im = uint8(reshape(framevec, lx, ly)*255/max(framevec));
             subplot(length(preview),3,(j-1)*3+1), imshow(im), title(['Original Frame #',num2str(preview(j))]), drawnow;
             subplot(length(preview),3,(j-1)*3+2), imshow(bg), title('Background'), drawnow;
             subplot(length(preview),3,(j-1)*3+3), imshow(fg), title('Foreground'), drawnow;
