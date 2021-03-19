@@ -47,3 +47,6 @@ Dynamic mode decomposition (DMD) was used to separate the foreground and backgro
 where the `rank` variable determined the number of SVD modes to use for background reconstruction and the `cutoff` variable was used as an upper limit to the frequency for the background DMD modes.
 
 A demo of this was implemented in `HW5.m` which processes two video files that can be [downloaded here.](https://drive.google.com/drive/folders/1SQ77P5t5RUWCSucmk4jPFbufFMX8VrJG?usp=sharing). The grayscale foreground and background videos are written to AVI movie files.
+
+## Final Project
+Quantum transport through a DNA structure was monitored as a function of the contact self-energies. Looking at principle components of the transmission spectrum and applying regularization methods it was possible to determine the correlation between the self-energies of the contacts and the transmission energy levels present in the structure. Run `TransmissionAnalysis.m` to visualize the principle components analysis and regression methods. Run `DOSPlot.m` to compare the weighting of the contact self-energies to the locations of peaks in the 2D density of states plot.
