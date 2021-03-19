@@ -54,7 +54,7 @@ Ur = U(:, 1:rank); Sr = S(1:rank, 1:rank); Vr = V(:, 1:rank);
 Tr = Ur*Sr*Vr';
 
 % Reconstruct tranmission graph using reduced mode
-figure(2);
+figure(2), subplot(1,2,1);
 n_graph = 200
 semilogy(E', T(:,n_graph), '-k', E', Tr(:, n_graph), '--k');
 title(['Transmission Graph Reconstruction (\Gamma_L=', num2str(gammaL(n_graph)),' \Gamma_R=', num2str(gammaR(n_graph)),') Rank=', num2str(rank)])
@@ -65,8 +65,11 @@ xline(homo,'--r', 'HOMO','HandleVisibility','off');
 xline(lumo,'--r', 'LUMO','HandleVisibility','off');
 
 
-x1_ls = LT'\gammaL;
-
+coeffsCompare = pinv(T')*gammaL;
+subplot(1,2,2), semilogy(E', abs(coeffsCompare));
+title('Generated pinv(A)*b Coefficients Without Log');
+xlabel('Energy (eV)');
+drawnow;
 
 % Use log of transmission for Regression
 LT = log10(T);
