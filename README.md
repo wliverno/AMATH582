@@ -42,7 +42,7 @@ This homeworked use principle components analysis and simple supervised machine-
 Dynamic mode decomposition (DMD) was used to separate the foreground and background of images. Using a low-rank basis and isolating low frequency DMD modes, background subtraction was used to isolate moving features. The general function from `dmdBgSub.m` was used to process the images with the following arguments
 
 ```
-[fgvid, bgvid] = eigenBucket(filename, rank, cutoff)
+[fgvid, bgvid] = edmdBgSub(filename, rank, cutoff)
 ```
 where the `rank` variable determined the number of SVD modes to use for background reconstruction and the `cutoff` variable was used as an upper limit to the frequency for the background DMD modes.
 
